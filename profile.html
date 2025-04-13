@@ -15,7 +15,7 @@
         }
 
         .dashboard-header {
-            background-color: #2c3e50;
+            background-color: #077023;
             color: #ecf0f1;
             padding: 1rem;
         }
@@ -106,7 +106,7 @@
         }
 
         .dashboard-footer {
-            background-color: #2c3e50;
+            background-color: #077023;
             color: #ecf0f1;
             text-align: center;
             padding: 1rem;
@@ -115,30 +115,30 @@
 
         /* Dark Mode */
         body.dark-mode {
-            background-color: #2c3e50;
+            background-color: #004d00; /* Dark Green */
             color: #ecf0f1;
         }
 
         body.dark-mode .dashboard-header {
-            background-color: #34495e;
+            background-color: #003300; /* Darker Green */
         }
 
         body.dark-mode .dashboard-footer {
-            background-color: #34495e;
+            background-color: #003300; /* Darker Green */
         }
 
         body.dark-mode .profile-section,
         body.dark-mode .preferences-section,
         body.dark-mode .security-section {
-            background: #34495e;
+            background-color: #1c1c1c; /* Blackish Background */
             color: #ecf0f1;
         }
 
         body.dark-mode .profile-form input,
         body.dark-mode .preferences-form select {
-            background-color: #2c3e50;
+            background-color: #1c1c1c; /* Blackish Input Fields */
             color: #ecf0f1;
-            border: 1px solid #2980b9;
+            border: 1px solid #2980b9; /* Blue Border */
         }
 
         body.dark-mode .button {
@@ -256,6 +256,28 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Set default theme to light on page load
+            const themeSelector = document.getElementById('theme');
+            let currentTheme = localStorage.getItem('theme');
+            
+            // If no theme is saved, default to 'light'
+            if (!currentTheme) {
+                currentTheme = 'light';
+                localStorage.setItem('theme', currentTheme); // Save default theme
+            }
+
+            // Apply the current theme
+            document.body.classList.remove('light', 'dark-mode'); // Remove any existing theme classes
+            document.body.classList.add(currentTheme === 'dark' ? 'dark-mode' : 'light');
+            themeSelector.value = currentTheme;
+
+            themeSelector.addEventListener('change', (e) => {
+                const selectedTheme = e.target.value;
+                document.body.classList.remove('light', 'dark-mode'); // Remove both themes
+                document.body.classList.add(selectedTheme === 'dark' ? 'dark-mode' : 'light'); // Add the selected theme
+                localStorage.setItem('theme', selectedTheme); // Save the theme preference
+            });
+
             const profileForm = document.querySelector('.profile-form');
 
             fetch('/api/profile/1')
