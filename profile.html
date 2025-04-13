@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Settings</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="dashboard-header">
+        <div class="header-container">
+            <h1>Profile Settings</h1>
+            <nav>
+                <ul class="dashboard-nav">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="task.html">Tasks</a></li>
+                    <li><a href="index.html">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="dashboard-content">
+        <div class="profile-layout">
+            <!-- Left Column: Basic Profile Info -->
+            <section class="profile-section">
+                <h2>Basic Profile Info</h2>
+                <form class="profile-form">
+                    <label for="profile-picture">Profile Picture</label>
+                    <input type="file" id="profile-picture" name="profile-picture" accept="image/*">
+
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" name="dob">
+
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender">
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <button type="submit" class="button">Save Changes</button>
+                </form>
+            </section>
+
+            <!-- Right Column: Security and Preferences -->
+            <div class="right-column">
+                <section class="security-section">
+                    <h2>Security Settings</h2>
+                    <ul>
+                        <li><a href="#">Change Password</a></li>
+                        <li><a href="#">Enable Two-Factor Authentication (2FA)</a></li>
+                        <li><a href="#">View Login History</a></li>
+                        <li><a href="#">Set Security Questions</a></li>
+                    </ul>
+                </section>
+
+                <section class="preferences-section">
+                    <h2>Preferences</h2>
+                    <form class="preferences-form">
+                        <label for="theme">Theme</label>
+                        <select id="theme" name="theme">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+
+                        <label for="language">Language</label>
+                        <select id="language" name="language">
+                            <option value="en">English</option>
+                            <option value="es">Spanish</option>
+                            <option value="fr">French</option>
+                        </select>
+
+                        <label for="timezone">Time Zone</label>
+                        <select id="timezone" name="timezone">
+                            <option value="utc">UTC</option>
+                            <option value="est">EST</option>
+                            <option value="pst">PST</option>
+                        </select>
+
+                        <label for="notifications">Notification Preferences</label>
+                        <div>
+                            <input type="checkbox" id="email-notifications" name="notifications" value="email">
+                            <label for="email-notifications">Email</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="sms-notifications" name="notifications" value="sms">
+                            <label for="sms-notifications">SMS</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="push-notifications" name="notifications" value="push">
+                            <label for="push-notifications">Push Notifications</label>
+                        </div>
+
+                        <button type="submit" class="button">Save Preferences</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </main>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const profileForm = document.querySelector('.profile-form');
+
+        // Fetch user profile
+        fetch('/api/profile/1') // Assuming user ID is 1
+            .then(response => response.json())
+            .then(user => {
+                profileForm.querySelector('#name').value = user.username;
+                profileForm.querySelector('#email').value = user.email;
+            })
+            .catch(error => console.error('Error fetching profile:', error));
+
+        // Update user profile
+        profileForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const updatedProfile = {
+                username: profileForm.querySelector('#name').value,
+                email: profileForm.querySelector('#email').value
+            };
+            fetch('/api/profile/1', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedProfile)
+            })
+                .then(response => response.json())
+                .then(updatedUser => {
+                    alert('Profile updated successfully!');
+                })
+                .catch(error => console.error('Error updating profile:', error));
+        });
+    });
+</script>
+    <!-- Footer Section -->
+    <footer class="dashboard-footer">
+        <p>&copy; 2025 Task Management System. All rights reserved.| Created by the team S.T.</p>
+    </footer>
+</body>
+</html>

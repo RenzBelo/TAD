@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Deadlines</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="scripts.js"></script> <!-- Link to JavaScript file -->
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="dashboard-header">
+        <div class="header-container">
+            <h1>Upcoming Deadlines</h1>
+            <nav>
+                <ul class="dashboard-nav">
+                    <li><a href="dashboard.html">Home</a></li>
+                    <li><a href="task.html">Tasks</a></li>
+                    <li><a href="index.html">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="dashboard-content">
+        <section class="deadlines-section">
+            <h2>Your Deadlines</h2>
+            <ul class="deadlines-list">
+                <li>
+                    <span>Project Report - Due: April 10, 2025</span>
+                    <button class="mark-done"><i class="fas fa-check"></i> Done</button>
+                </li>
+                <li>
+                    <span>Team Meeting - Due: April 12, 2025</span>
+                    <button class="mark-done"><i class="fas fa-check"></i> Done</button>
+                </li>
+                <li>
+                    <span>Code Review - Due: April 15, 2025</span>
+                    <button class="mark-done"><i class="fas fa-check"></i> Done</button>
+                </li>
+            </ul>
+        </section>
+    </main>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const deadlineList = document.querySelector('.deadlines-list');
+
+        // Fetch deadlines
+        fetch('/api/deadlines')
+            .then(response => response.json())
+            .then(deadlines => {
+                deadlines.forEach(deadline => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <span>${deadline.name} - Due: ${deadline.dueDate}</span>
+                        <button onclick="markDeadlineDone(${deadline.id})">Done</button>
+                    `;
+                    deadlineList.appendChild(li);
+                });
+            })
+            .catch(error => console.error('Error fetching deadlines:', error));
+    });
+
+    // Mark deadline as done
+    function markDeadlineDone(deadlineId) {
+        fetch(`/api/deadlines/${deadlineId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ done: true })
+        })
+            .then(() => location.reload())
+            .catch(error => console.error('Error marking deadline as done:', error));
+    }
+</script>
+    <!-- Footer Section -->
+    <footer class="dashboard-footer">
+        <p>&copy; 2025 Task Management System. All rights reserved.| Created by the team S.T.</p>
+    </footer>
+</body>
+</html>
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+    <!-- Header Section -->
+    <header class="dashboard-header">
+        <div class="header-container">
+            <!-- Title -->
+            <h1 class="dashboard-title">TASK ASSIGNMENT DASHBOARD</h1>
+            <!-- Logout Button -->
+            <button class="logout-button" onclick="handleLogout()">Logout</button>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="dashboard-content">
+        <section class="dashboard-left-column">
+            <!-- Task Summary Icon -->
+            <a href="task.html" class="dashboard-icon-link">
+                <div class="dashboard-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+            </a>
+    
+            <!-- Upcoming Deadlines Icon -->
+            <a href="deadlines.html" class="dashboard-icon-link">
+                <div class="dashboard-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+            </a>
+    
+            <!-- Team Collaboration Icon -->
+            <a href="collaboration.html" class="dashboard-icon-link">
+                <div class="dashboard-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+            </a>
+    
+            <!-- Profile Settings Icon -->
+            <a href="profile.html" class="dashboard-icon-link">
+                <div class="dashboard-icon">
+                    <i class="fas fa-user-cog"></i>
+                </div>
+            </a>
+        </section>
+        <div class="dashboard-text">
+            <div class="v2_42">TO-DO</div>
+            <div class="v2_43">STATUS</div>
+            <div class="v2_45">IN PROGRESS</div>
+            <div class="v2_49">COMPLETED</div>
+        </div>
+    </main>
+
+    <script>
+        function handleLogout() {
+            // Clear any session or local storage data (if applicable)
+            localStorage.clear();
+            sessionStorage.clear();
+
+            // Redirect to the login page
+            window.location.href = "index.html";
+        }
+    </script>
+
+    <!-- Footer Section -->
+    <footer class="dashboard-footer">
+        <p>&copy; 2025 Task Assignment Dashboard. All rights reserved. | S.T.</p>
+    </footer>
+</body>
+</html>

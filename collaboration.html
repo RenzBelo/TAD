@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Collaboration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="dashboard-header">
+        <div class="header-container">
+            <h1>Team Collaboration</h1>
+            <nav>
+                <ul class="dashboard-nav">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="task.html">Tasks</a></li>
+                    <li><a href="index.html">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="dashboard-content">
+        <section class="collaboration-section">
+            <h2>Team Chat</h2>
+            <div class="chat-box">
+                <div class="chat-messages">
+                    <p><strong>John:</strong> Don't forget about the meeting tomorrow!</p>
+                    <p><strong>Jane:</strong> Got it! I'll prepare the slides.</p>
+                </div>
+                <form class="chat-form">
+                    <input type="text" placeholder="Type your message..." required>
+                    <button type="submit" class="button">Send</button>
+                </form>
+            </div>
+
+            <h2>Announcements</h2>
+            <ul class="announcement-list">
+                <li>Project deadline extended to April 15, 2025.</li>
+                <li>Team meeting scheduled for April 12, 2025, at 10:00 AM.</li>
+            </ul>
+        </section>
+    </main>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const chatBox = document.querySelector('.chat-box');
+
+        // Fetch messages (mock example)
+        fetch('/api/messages') // Replace with your backend route
+            .then(response => response.json())
+            .then(messages => {
+                messages.forEach(message => {
+                    const p = document.createElement('p');
+                    p.textContent = `${message.sender}: ${message.text}`;
+                    chatBox.appendChild(p);
+                });
+            })
+            .catch(error => console.error('Error fetching messages:', error));
+    });
+</script>
+    <!-- Footer Section -->
+    <footer class="dashboard-footer">
+        <p>&copy; 2025 Task Management System. All rights reserved.</p>
+    </footer>
+</body>
+</html>

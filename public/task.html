@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Font Awesome for icons -->
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="dashboard-header">
+        <div class="header-container">
+            <h1>Task Management</h1>
+            <nav>
+                <ul class="dashboard-nav">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="deadlines.html">Deadlines</a></li>
+                    <li><a href="index.html">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="dashboard-content">
+        <section class="task-section">
+            <h2>Your Tasks</h2>
+            <ul class="task-list">
+                <li>
+                    <span><i class="fas fa-tasks"></i> Complete project report</span>
+                    <div class="task-actions">
+                        <button class="task-edit"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="task-delete"><i class="fas fa-trash"></i> Delete</button>
+                    </div>
+                </li>
+                <li>
+                    <span><i class="fas fa-tasks"></i> Attend team meeting</span>
+                    <div class="task-actions">
+                        <button class="task-edit"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="task-delete"><i class="fas fa-trash"></i> Delete</button>
+                    </div>
+                </li>
+                <li>
+                    <span><i class="fas fa-tasks"></i> Review code changes</span>
+                    <div class="task-actions">
+                        <button class="task-edit"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="task-delete"><i class="fas fa-trash"></i> Delete</button>
+                    </div>
+                </li>
+            </ul>
+
+            <h3>Add New Task</h3>
+            <form class="task-form">
+                <input type="text" placeholder="Enter new task" required>
+                <button type="submit" class="button"><i class="fas fa-plus"></i> Add Task</button>
+            </form>
+        </section>
+    </main>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const taskList = document.querySelector('.task-list');
+        const taskForm = document.querySelector('.task-form');
+
+        // Fetch tasks
+        fetch('/api/tasks')
+            .then(response => response.json())
+            .then(tasks => {
+                tasks.forEach(task => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <span>${task.name}</span>
+                        <button onclick="markTaskDone(${task.id})">Done</button>
+                        <button onclick="deleteTask(${task.id})">Delete</button>
+                    `;
+                    taskList.appendChild(li);
+                });
+            })
+            .catch(error => console.error('Error fetching tasks:', error));
+
+        // Add new task
+        taskForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const taskName = taskForm.querySelector('input').value;
+            fetch('/api/tasks', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: taskName })
+            })
+                .then(response => response.json())
+                .then(newTask => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <span>${newTask.name}</span>
+                        <button onclick="markTaskDone(${newTask.id})">Done</button>
+                        <button onclick="deleteTask(${newTask.id})">Delete</button>
+                    `;
+                    taskList.appendChild(li);
+                })
+                .catch(error => console.error('Error adding task:', error));
+        });
+    });
+
+    // Mark task as done
+    function markTaskDone(taskId) {
+        fetch(`/api/tasks/${taskId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ done: true })
+        })
+            .then(() => location.reload())
+            .catch(error => console.error('Error marking task as done:', error));
+    }
+
+    // Delete task
+    function deleteTask(taskId) {
+        fetch(`/api/tasks/${taskId}`, { method: 'DELETE' })
+            .then(() => location.reload())
+            .catch(error => console.error('Error deleting task:', error));
+    }
+</script>
+    <!-- Footer Section -->
+    <footer class="dashboard-footer">
+        <p>&copy; 2025 Task Management System. All rights reserved.| Created by the team S.T.</p>
+    </footer>
+</body>
+</html>

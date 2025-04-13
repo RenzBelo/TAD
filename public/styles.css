@@ -1,0 +1,652 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Background for Index Page */
+.index-page {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: url('background_index.png') no-repeat center center fixed; /* Background for index */
+    background-size: cover; /* Ensure the image covers the entire background */
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align content to the left */
+}
+
+/* Transparent Header */
+.transparent-header {
+    position: fixed; /* Fix the header at the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width */
+    background: rgba(255, 255, 255, 0.3); /* Semi-transparent white background */
+    backdrop-filter: blur(5px); /* Optional: Add a blur effect */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 0px; /* Add padding for spacing */
+    z-index: 1000; /* Ensure it stays above other content */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for separation */
+}
+
+/* Logo Section */
+.logo {
+    display: flex;
+    align-items: center; /* Vertically center the logo */
+    justify-content: flex-start; /* Align the logo to the left */
+    margin: 0; /* Remove any margin */
+    padding: 20px; /* Remove any padding */
+    position: relative; /* Ensure it stays at the very left */
+    /*left: 20px; /* Align it to the left edge */
+    right: 670%;
+}
+
+.logo-image {
+    width: 80px; /* Adjust the size of the logo */
+    height: auto;
+}
+
+/* Navigation Links */
+.nav-links {
+    position: fixed; /* Fix the links in place */
+    top: 50%; /* Center vertically */
+    right: 7%; /* Position them 20px from the right */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    display: flex;
+    flex-direction: row; /* Stack the links vertically */
+    gap: 150px; /* Add spacing between the links */
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333; /* Text color */
+    transition: color 0.3s;
+    text-align: right; /* Align text to the right */
+    
+}
+
+.nav-links a:hover {
+    color: #007BFF; /* Change color on hover */
+}
+
+/* Form Container */
+.form-container {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 16%; /* Move to the left */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Add shadow for better visibility */
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    padding: 10px;
+    border: 0px solid #000; /* Strong border */
+    border-radius: 10px; /* Rounded edges */
+    display: inline-block; /* Ensures proper wrapping */
+    background: white; /* Optional: Better contrast */
+}
+
+.container {
+    position: relative;
+    max-width: 400px;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    text-align: center;
+}
+.login__field {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+}
+.login__icon {
+    margin-right: 10px;
+    color: #555;
+}
+.login__input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    outline: none;
+}
+.button {
+    background: #007BFF;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.button:hover {
+    background: #0056b3;
+}
+.toggle-text {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #555;
+    cursor: pointer;
+}
+.toggle-text:hover {
+    text-decoration: underline;
+}
+.hidden {
+    display: none;
+}
+/* Footer Styles for Index */
+.index-footer {
+    position: fixed; /* Fix the footer at the bottom */
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Ensure the footer spans the full width */
+    background: rgba(128, 128, 128, 0.3); /* Semi-transparent gray background */
+    backdrop-filter: blur(5px); /* Optional: Add a blur effect for a modern look */
+    text-align: center;
+    padding: 10px 0; /* Add vertical padding */
+    font-size: 0.9rem; /* Slightly smaller font size */
+    color: #333; /* Subtle text color */
+    z-index: 1000; /* Ensure it stays above other content */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+}
+/* Dashboard Styles */
+
+/* Header Styles */
+.dashboard-header {
+    position: fixed; /* Fix the header at the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width */
+    height: 55px; /* Fixed height for the header */
+    background: rgba(253, 253, 253, 0.8); /* Slightly transparent background */
+    color: black; /* Text color */
+    padding: 12px 20px; /* Add padding for spacing */
+    text-align: left; /* Align text to the left */
+    z-index: 1000; /* Ensure it stays above other content */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for separation */
+}
+
+/* Dashboard Title */
+.dashboard-title {
+    font-family: 'Horizon', sans-serif; /* Use Horizon font */
+    font-size: 2.5rem; /* Adjust font size */
+    font-weight: bold;
+    margin: 0; /* Remove default margin */
+    text-transform: uppercase; /* Make the text uppercase */
+    letter-spacing: 2px; /* Add spacing between letters */
+}
+/* Dashboard Background */
+/* Background for Dashboard Page */
+.dashboard-page {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: url('background_dashboard.jpg') no-repeat center center fixed; /* Background for dashboard */
+    background-size: cover; /* Ensure the image covers the entire background */
+    color: #333;
+    display: flex;
+    flex-direction: column; /* Allow header and content stacking */
+}
+.dashboard-nav {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.dashboard-nav li {
+    display: inline;
+}
+.dashboard-nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+.dashboard-nav a:hover {
+    text-decoration: underline;
+}
+/* Header Container */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space between title and logout button */
+    padding: 0 20px; /* Add padding for spacing */
+}
+
+/* Logout Button */
+.logout-button {
+    background: #FF4D4D; /* Red background for the button */
+    color: white; /* White text color */
+    border: none;
+    padding: 10px 20px; /* Add padding for better clickability */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1rem; /* Adjust font size */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.logout-button:hover {
+    background: #CC0000; /* Darker red on hover */
+}
+/* Main Content Styles */
+.dashboard-content {
+    flex: 1; /* Allow the content to grow and fill the space */
+    display: flex; /* Use Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    padding: 100px 20px; /* Add padding to account for the header and footer */
+    margin-top: 80px; /* Ensure it doesn't overlap the header */
+    margin-bottom: 60px; /* Ensure it doesn't overlap the footer */
+    background: transparent; /* Allow the background to show through */
+    box-sizing: border-box; /* Include padding in the element's total width/height */
+}
+
+/* Dashboard Left Column */
+/* Dashboard Left Column */
+.dashboard-left-column {
+    display: flex;
+    flex-direction: column; /* Arrange items in a column */
+    align-items: center; /* Center icons horizontally */
+    justify-content: flex-start; /* Align icons to the top */
+    background: rgba(40, 167, 69, 0.9); /* Green background with slight transparency */
+    padding: 55px 0 0; /* Adjust padding to align with the header height */
+    width: 118px; /* Fixed width for the column */
+    height: calc(100vh - 55px); /* Full height minus the header height */
+    position: fixed; /* Fix the column to the left */
+    top: 80px; /* Align the top of the column with the bottom of the header */
+    left: 0; /* Align to the left of the viewport */
+    z-index: 999; /* Ensure it stays below the header and footer */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+/* Dashboard Icon Links */
+.dashboard-icon-link {
+    text-decoration: none; /* Remove underline */
+    color: white; /* Icon color */
+    margin: 20px 0; /* Add spacing between icons */
+    display: flex;
+    justify-content: flex-start; /* Align icons to the left */
+    align-items: center;
+    padding-left: 0px; /* Adjust this value to move icons to the right or left */
+}
+
+/* Dashboard Icons */
+.dashboard-icon {
+    font-size: 2.5rem; /* Adjust icon size */
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+    padding: 20px;
+    border-radius: 50%; /* Make the icon background circular */
+    transition: transform 0.3s, background 0.3s;
+}
+
+.dashboard-icon:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+    background: rgba(255, 255, 255, 0.4); /* Lighten background on hover */
+}
+/* Dashboard Text Positioning */
+
+/* Title 1 */
+.v2_42 {
+    width: 124px;
+    left: 220px; /* Horizontal position */
+   
+}
+/* Title 2 */
+.v2_43 {
+    width: 144px;
+    left: 540px; /* Horizontal position */
+}
+/* Title 3 */
+.v2_45 {
+    width: 242px;
+    left: 860px; /* Horizontal position */
+}
+/* Title 4 */
+.v2_49 {
+    width: 229px;
+    left: 1180px; /* Horizontal position */
+}
+.v2_42, .v2_43, .v2_45, .v2_49 {
+    color: rgba(0, 0, 0, 1); /* Black text for light backgrounds */
+    top: 100px; /* Vertical position */
+    position: absolute;
+    font-family: 'Inter', sans-serif; /* Use Inter font */
+    text-align: left;
+    font-weight: 800; /* Extra Bold */
+    font-size: 36px; /* Font size */
+}
+
+
+/* Task Section */
+.task-section {
+    text-align: left;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.task-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px; /* Increased padding for larger items */
+    margin-bottom: 15px; /* Increased spacing between tasks */
+    background: #f9f9f9;
+    border-radius: 10px; /* Slightly larger border radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced shadow for better visibility */
+}
+
+.task-list li span {
+    flex: 1;
+    font-size: 1.2rem; /* Increased font size for task text */
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Increased gap between icon and text */
+}
+
+.task-actions {
+    display: flex;
+    gap: 15px; /* Increased spacing between buttons */
+}
+
+.task-edit, .task-delete {
+    background: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 15px; /* Increased padding for larger buttons */
+    border-radius: 8px; /* Slightly larger border radius */
+    cursor: pointer;
+    font-size: 1rem; /* Increased font size for button text */
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Increased gap between icon and text */
+    transition: background 0.3s;
+}
+
+.task-edit:hover {
+    background: #0056b3;
+}
+
+.task-delete {
+    background: #FF4D4D;
+}
+
+.task-delete:hover {
+    background: #CC0000;
+}
+
+.task-form {
+    display: flex;
+    gap: 15px; /* Increased spacing between input and button */
+    margin-top: 30px; /* Increased spacing above the form */
+}
+
+.task-form input {
+    flex: 1;
+    padding: 15px; /* Increased padding for larger input field */
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Slightly larger border radius */
+    font-size: 1.2rem; /* Increased font size for input text */
+}
+
+.task-form button {
+    padding: 15px 25px; /* Increased padding for larger button */
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 8px; /* Slightly larger border radius */
+    cursor: pointer;
+    font-size: 1.2rem; /* Increased font size for button text */
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Increased gap between icon and text */
+    transition: background 0.3s;
+}
+
+.task-form button:hover {
+    background: #0056b3;
+}
+
+/* Deadlines Section */
+.deadlines-section {
+    text-align: left;
+    padding: 30px; /* Increased padding for better spacing */
+    max-width: 900px; /* Increased width for larger content area */
+    margin: 0 auto;
+}
+
+.deadlines-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    max-height: 400px; /* Increased height for scrollable list */
+    overflow-y: auto; /* Enable vertical scrolling */
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Slightly larger border radius */
+    background: #f9f9f9;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1); /* Enhanced shadow for better visibility */
+}
+
+.deadlines-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px; /* Increased padding for larger items */
+    border-bottom: 1px solid #ddd;
+    font-size: 1.2rem; /* Increased font size for task text */
+    color: #333;
+}
+
+.deadlines-list li:last-child {
+    border-bottom: none; /* Remove border for the last item */
+}
+
+.mark-done {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px; /* Increased padding for larger button */
+    border-radius: 8px; /* Slightly larger border radius */
+    cursor: pointer;
+    font-size: 1rem; /* Increased font size for button text */
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+    transition: background 0.3s;
+}
+
+.mark-done:hover {
+    background: #218838;
+}
+
+.done {
+    text-decoration: line-through;
+    color: #888;
+}
+
+/* Collaboration Section */
+.collaboration-section {
+    text-align: left;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.chat-box {
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.chat-messages {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.chat-messages p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.chat-form {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-form input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.chat-form button {
+    padding: 10px 20px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.chat-form button:hover {
+    background: #0056b3;
+}
+
+.announcement-list {
+    list-style: disc;
+    padding-left: 20px;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Profile Section */
+/* Profile Layout */
+.profile-layout {
+    display: flex;
+    gap: 30px; /* Space between columns */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.profile-section {
+    flex: 1; /* Left column takes up equal space */
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.right-column {
+    flex: 1; /* Right column takes up equal space */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.security-section, .preferences-section {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.security-section ul, .preferences-section form {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.security-section ul li {
+    margin: 10px 0;
+}
+
+.security-section ul li a {
+    color: #007BFF;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.security-section ul li a:hover {
+    text-decoration: underline;
+}
+
+.preferences-form label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.preferences-form select, .preferences-form input[type="checkbox"] {
+    margin-bottom: 15px;
+}
+
+.button {
+    padding: 10px 20px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.button:hover {
+    background: #0056b3;
+}
+
+/* Footer Styles for Dashboard */
+.dashboard-footer {
+    position: fixed; /* Fix the footer at the bottom */
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Ensure the footer spans the full width */
+    background: rgba(128, 128, 128, 0.3); /* Semi-transparent gray background */
+    backdrop-filter: blur(5px); /* Optional: Add a blur effect for a modern look */
+    text-align: center;
+    padding: 10px 0; /* Add vertical padding */
+    font-size: 0.9rem; /* Slightly smaller font size */
+    color: #333; /* Subtle text color */
+    z-index: 1000; /* Ensure it stays above other content */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+}

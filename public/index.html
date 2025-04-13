@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Assignment Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<!-- Header Section -->
+
+<header class="transparent-header">
+    <div class="header-container">
+        <!-- Logo Section -->
+        <div class="logo">
+            <img src="logo_index.jpg" alt="T.A.D. Logo" class="logo-image">
+        </div>
+        <!-- Navigation Buttons -->
+        <nav class="nav-links">
+            <a href="#about">About</a>
+            <a href="#news">News</a>
+            <a href="#contact">Contact Us</a>
+        </nav>
+    </div>
+</header>
+<body>
+    <div class="background-container">
+        <div class="form-container">
+            <h1>T.A.D.</h1>
+            <!-- Login Form -->
+            <div id="login-form">
+                <form class="login" onsubmit="handleLogin(event)">
+                    <h2>Login</h2>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-user"></i>
+                        <input type="email" id="login-email" class="login__input" placeholder="Email" required>
+                    </div>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-lock"></i>
+                        <input type="password" id="login-password" class="login__input" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="button login__submit">Log In Now</button>
+                    <p id="login-error" class="error-message"></p>
+                </form>
+                <p class="toggle-text" onclick="toggleForms()">Don't have an account? Sign up here</p>
+            </div>
+
+            <!-- Sign-Up Form -->
+            <div id="signup-form" class="hidden">
+                <form class="signup" onsubmit="handleSignup(event)">
+                    <h2>Sign Up</h2>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-user"></i>
+                        <input type="text" id="signup-name" class="login__input" placeholder="Full Name" required>
+                    </div>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-envelope"></i>
+                        <input type="email" id="signup-email" class="login__input" placeholder="Email" required>
+                    </div>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-lock"></i>
+                        <input type="password" id="signup-password" class="login__input" placeholder="Password" required>
+                    </div>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-lock"></i>
+                        <input type="password" id="signup-confirm-password" class="login__input" placeholder="Confirm Password" required>
+                    </div>
+                    <button type="submit" class="button signup__submit">Sign Up Now</button>
+                    <p id="signup-error" class="error-message"></p>
+                </form>
+                <p class="toggle-text" onclick="toggleForms()">Already have an account? Log in here</p>
+            </div>
+        </div>
+    </div>
+    <body class="index-page">
+    <script>
+        // Toggle between login and sign-up forms
+        function toggleForms() {
+            document.getElementById("login-form").classList.toggle("hidden");
+            document.getElementById("signup-form").classList.toggle("hidden");
+        }
+
+        // Handle Login
+        async function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById("login-email").value;
+            const password = document.getElementById("login-password").value;
+
+            try {
+                const response = await fetch('http://localhost:3000/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    alert('Login successful!');
+                    window.location.href = "dashboard.html"; // Redirect to dashboard
+                } else {
+                    alert('Access Denied!'); // Display "Access Denied" message
+                    location.reload(); // Refresh the page
+                }
+            } catch (error) {
+                console.error('Error during login:', error);
+                alert('An error occurred. Please try again.');
+                location.reload(); // Refresh the page in case of an error
+            }
+        }
+
+        // Handle Sign-Up
+        async function handleSignup(event) {
+            event.preventDefault();
+            const name = document.getElementById("signup-name").value;
+            const email = document.getElementById("signup-email").value;
+            const password = document.getElementById("signup-password").value;
+            const confirmPassword = document.getElementById("signup-confirm-password").value;
+
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                document.getElementById("signup-error").textContent = "Passwords do not match!";
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/api/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: name, email, password })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    alert('Account created successfully! Please log in.');
+                    toggleForms(); // Switch to login form
+                } else {
+                    document.getElementById("signup-error").textContent = data.message;
+                }
+            } catch (error) {
+                console.error('Error during sign-up:', error);
+                document.getElementById("signup-error").textContent = "An error occurred. Please try again.";
+            }
+        }
+    </script>
+    <!-- Footer Section -->
+    <footer class="index-footer">
+        <p>&copy; 2025 Task Assignment Dashboard. All rights reserved. | S.T.</p>
+    </footer>
+</body>
+</html>
