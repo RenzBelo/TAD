@@ -5,6 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Settings</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Default Light Mode */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        .dashboard-header {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 1rem;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dashboard-nav {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .dashboard-nav li a {
+            color: #ecf0f1;
+            text-decoration: none;
+        }
+
+        .dashboard-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .profile-layout {
+            display: flex;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .profile-section, .security-section, .preferences-section {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .profile-section, .right-column {
+            flex: 1;
+        }
+
+        .profile-form input,
+        .profile-form select,
+        .preferences-form select {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .button {
+            background-color: #3498db;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .security-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .security-section li a {
+            display: block;
+            padding: 0.5rem 0;
+            color: #2980b9;
+            text-decoration: none;
+            transition: text-decoration 0.3s ease;
+        }
+
+        .security-section li a:hover {
+            text-decoration: underline;
+        }
+
+        .dashboard-footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        body.dark-mode .dashboard-header {
+            background-color: #34495e;
+        }
+
+        body.dark-mode .dashboard-footer {
+            background-color: #34495e;
+        }
+
+        body.dark-mode .profile-section,
+        body.dark-mode .preferences-section,
+        body.dark-mode .security-section {
+            background: #34495e;
+            color: #ecf0f1;
+        }
+
+        body.dark-mode .profile-form input,
+        body.dark-mode .preferences-form select {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            border: 1px solid #2980b9;
+        }
+
+        body.dark-mode .button {
+            background-color: #2980b9;
+        }
+    </style>
 </head>
 <body>
     <!-- Header Section -->
@@ -113,42 +253,58 @@
             </div>
         </div>
     </main>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const profileForm = document.querySelector('.profile-form');
 
-        // Fetch user profile
-        fetch('/api/profile/1') // Assuming user ID is 1
-            .then(response => response.json())
-            .then(user => {
-                profileForm.querySelector('#name').value = user.username;
-                profileForm.querySelector('#email').value = user.email;
-            })
-            .catch(error => console.error('Error fetching profile:', error));
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const profileForm = document.querySelector('.profile-form');
 
-        // Update user profile
-        profileForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const updatedProfile = {
-                username: profileForm.querySelector('#name').value,
-                email: profileForm.querySelector('#email').value
-            };
-            fetch('/api/profile/1', {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(updatedProfile)
-            })
+            fetch('/api/profile/1')
                 .then(response => response.json())
+                .then(user => {
+                    profileForm.querySelector('#name').value = user.name || '';
+                    profileForm.querySelector('#username').value = user.username || '';
+                    profileForm.querySelector('#email').value = user.email || '';
+                    profileForm.querySelector('#phone').value = user.phone || '';
+                    profileForm.querySelector('#dob').value = user.dob || '';
+                    profileForm.querySelector('#gender').value = user.gender || '';
+                })
+                .catch(error => console.error('Error fetching profile:', error));
+
+            profileForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const updatedProfile = {
+                    name: profileForm.querySelector('#name').value,
+                    username: profileForm.querySelector('#username').value,
+                    email: profileForm.querySelector('#email').value,
+                    phone: profileForm.querySelector('#phone').value,
+                    dob: profileForm.querySelector('#dob').value,
+                    gender: profileForm.querySelector('#gender').value
+                };
+                fetch('/api/profile/1', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updatedProfile)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to update profile');
+                    }
+                    return response.json();
+                })
                 .then(updatedUser => {
                     alert('Profile updated successfully!');
                 })
-                .catch(error => console.error('Error updating profile:', error));
+                .catch(error => {
+                    console.error('Error updating profile:', error);
+                    alert('There was an error updating your profile. Please try again.');
+                });
+            });
         });
-    });
-</script>
+    </script>
+
     <!-- Footer Section -->
     <footer class="dashboard-footer">
-        <p>&copy; 2025 Task Management System. All rights reserved.| Created by the team S.T.</p>
+        <p>&copy; 2025 Task Management System. All rights reserved. | Created by the team S.T.</p>
     </footer>
 </body>
 </html>
